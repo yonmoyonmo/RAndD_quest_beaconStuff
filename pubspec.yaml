@@ -21,8 +21,11 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  graphql: ^3.0.0
+  bloc: ^3.0.0
+  flutter_bloc: ^3.2.0
+  equatable: ^1.1.1
   flutter_beacon: ^0.3.0
-  flutter_blue: ^0.7.2
   flutter:
     sdk: flutter
 

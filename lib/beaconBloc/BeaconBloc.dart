@@ -39,6 +39,8 @@ class BeaconBloc {
     _streamBluetooth = flutterBeacon
         .bluetoothStateChanged()
         .listen((BluetoothState state) async {
+      if (!authorizationStatusOk) await flutterBeacon.requestAuthorization;
+      if (!bluetoothEnabled) await flutterBeacon.bluetoothState;
       print('BluetoothState = $state');
       stateSink.add(state);
       switch (state) {
@@ -54,18 +56,13 @@ class BeaconBloc {
   }
   checkAllRequirements() async {
     final bluetoothState = await flutterBeacon.bluetoothState;
-    //상태를 확인하고
     final bluetoothEnabled = bluetoothState == BluetoothState.stateOn;
-    //true or false
     final authorizationStatus = await flutterBeacon.authorizationStatus;
-    //마법으로 허가를 요청함
     final authorizationStatusOk =
         authorizationStatus == AuthorizationStatus.allowed ||
             authorizationStatus == AuthorizationStatus.always;
-    //true of false
     final locationServiceEnabled =
         await flutterBeacon.checkLocationServicesIfEnabled;
-    //상태 바까줌
     this.authorizationStatusOk = authorizationStatusOk;
     this.locationServiceEnabled = locationServiceEnabled;
     this.bluetoothEnabled = bluetoothEnabled;
@@ -74,7 +71,7 @@ class BeaconBloc {
   initScanBeacon() async {
     await flutterBeacon.initializeScanning;
     await checkAllRequirements();
-    if (!authorizationStatusOk || //셋 중 하나라도 false?
+    if (!authorizationStatusOk ||
         !locationServiceEnabled ||
         !bluetoothEnabled) {
       print('RETURNED, authorizationStatusOk=$authorizationStatusOk, '
@@ -113,6 +110,7 @@ class BeaconBloc {
         //print(_beacons);
         _beacons.forEach((element) {
           if (element.accuracy < 4) {
+            //거리지표
             beaconSink.add(element);
             macSink.add(element.macAddress);
             majSink.add(element.major);
