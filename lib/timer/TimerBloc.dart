@@ -7,9 +7,8 @@ part 'TimerEvents.dart';
 part 'TimerStates.dart';
 
 class TimerBloc extends Bloc<TimerEvents, TimerStates> {
-  @override
   TimerStates get initialState => TimerInitial();
-  TimerBloc(this._timer);
+  TimerBloc(this._timer) : super(null);
   final Timer _timer;
   StreamSubscription _subscription;
   @override

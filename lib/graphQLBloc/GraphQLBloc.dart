@@ -6,10 +6,10 @@ import 'GraphQLStates.dart';
 class GraphQLBloc extends Bloc<GraphQLEvents, GraphQLStates> {
   GraphQLService service;
 
-  GraphQLBloc() {
+  GraphQLBloc() : super(null) {
     service = GraphQLService();
   }
-  @override
+
   GraphQLStates get initialState => Loading();
 
   @override

@@ -22,8 +22,9 @@ environment:
 
 dependencies:
   graphql: ^3.0.0
-  bloc: ^3.0.0
-  flutter_bloc: ^3.2.0
+  provider: ^4.3.2+1
+  bloc: ^6.0.0
+  flutter_bloc: ^6.0.4
   equatable: ^1.1.1
   flutter_beacon: ^0.3.0
   flutter:
