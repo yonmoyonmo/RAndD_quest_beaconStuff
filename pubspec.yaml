@@ -28,10 +28,6 @@ dependencies:
   equatable: ^1.1.1
   flutter_beacon: ^0.3.0
   formz: ^0.2.0
-  authentication_repository:
-    path: packages/authentication_repository
-  user_repository:
-    path: packages/user_repository
   flutter:
     sdk: flutter
 
